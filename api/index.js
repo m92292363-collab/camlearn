@@ -1,7 +1,7 @@
 // Vercel serverless function: /api/index.js
 // Env var needed: GEMINI_API_KEY (free from aistudio.google.com/apikey)
 
-const MODEL = 'gemini-2.5-flash';
+const MODEL = 'gemini-flash-latest';
 
 async function gemini(system, parts) {
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
