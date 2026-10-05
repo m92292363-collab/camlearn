@@ -1,10 +1,10 @@
 // Vercel serverless function: /api/index.js
 // Env var needed: GEMINI_API_KEY (free from aistudio.google.com/apikey)
 
-const MODEL = 'gemini-flash-latest';
+const MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-3.8-flash'];
 
-async function gemini(system, parts) {
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
+async function callOnce(model, system, parts) {
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
     body: JSON.stringify({
@@ -18,6 +18,14 @@ async function gemini(system, parts) {
   const text = (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('');
   if (!text) throw new Error('The AI sent back nothing. Try a clearer photo.');
   return JSON.parse(text.replace(/```json|```/g, '').trim());
+}
+
+async function gemini(system, parts) {
+  let lastErr;
+  for (const m of MODELS) {
+    try { return await callOnce(m, system, parts); } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
 }
 
 module.exports = async (req, res) => {
