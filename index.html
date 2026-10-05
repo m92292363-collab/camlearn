@@ -48,8 +48,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .head h1{font-size:1.8rem;font-weight:900}.head p{color:var(--muted);font-size:.95rem}
 .mlogout{display:none;background:#fff;border:0;border-radius:10px;padding:.5rem .9rem;color:var(--red);font-weight:700}
 .card{background:#fff;border-radius:var(--r);padding:1.5rem;box-shadow:0 2px 15px rgba(0,0,0,.06);margin-top:1.2rem}
-.snap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;min-height:190px;border:3px dashed var(--pink);border-radius:var(--r);background:#fff;font-weight:800;text-align:center;padding:1rem;position:relative;overflow:hidden}
-.snap input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.snap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;min-height:190px;border:3px dashed var(--pink);border-radius:var(--r);background:#fff;font-weight:800;text-align:center;padding:1rem;position:relative;overflow:hidden;cursor:pointer}
 .snap .big{font-size:2.6rem}.snap img{max-width:100%;max-height:240px;border-radius:12px}
 .seg{display:flex;gap:.6rem;margin:1rem 0 .3rem}
 .seg button{flex:1;padding:.8rem;border-radius:14px;border:2px solid #ede8ff;background:#fff;color:var(--text);font-weight:800}
@@ -66,6 +65,17 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 @media (prefers-reduced-motion:no-preference){.logo-avatar{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}.pop{animation:pop .7s ease}@keyframes pop{0%{transform:scale(.4) rotate(-12deg);opacity:0}60%{transform:scale(1.15) rotate(4deg);opacity:1}100%{transform:scale(1)}}.spin{display:inline-block;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
 .opt{display:block;width:100%;text-align:left;padding:.9rem 1rem;margin-top:.7rem;border-radius:14px;border:2px solid #ede8ff;background:var(--bg);color:var(--text);font:inherit;font-weight:700;transition:.2s}
 .opt:hover{border-color:var(--pink)}.opt.ok{border-color:var(--green);background:#00c89622}.opt.no{border-color:var(--red);background:#ff475722}
+
+/* CAMERA */
+#cam{position:fixed;inset:0;z-index:1000;background:#000;display:flex;flex-direction:column}
+#cam video{flex:1;min-height:0;width:100%;object-fit:cover;background:#000}
+.camtop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(.8rem + env(safe-area-inset-top,0px)) 1rem .8rem;color:#fff;font-weight:800;background:linear-gradient(#000a,transparent);z-index:2}
+.camtop button{background:#ffffff30;border:0;color:#fff;width:40px;height:40px;border-radius:50%;font-size:1.1rem}
+.camerr{position:absolute;left:1rem;right:1rem;top:50%;transform:translateY(-50%);text-align:center;color:#fff;font-weight:700;line-height:1.6;z-index:2}
+.cambar{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:1.2rem 1rem calc(1.2rem + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,#000a);z-index:2}
+.cambar .sm{background:#ffffff30;border:0;color:#fff;width:50px;height:50px;border-radius:50%;font-size:1.3rem}
+#shutter{width:76px;height:76px;border-radius:50%;border:5px solid #fff;background:var(--pink);box-shadow:0 0 0 4px #ffffff40;transition:transform .15s}
+#shutter:active{transform:scale(.9)}
 
 /* ADMIN */
 .adm-box{background:var(--dark);border-radius:var(--r);padding:1.5rem;color:#fff}
@@ -191,7 +201,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
     <div class="nav-logo">🤖 <span>AISHA</span></div>
     <div class="nav-btns">
       <a href="#" data-auth="login" class="btn btn-outline">Login</a>
-      <a href="#" data-auth="reg" class="btn btn-primary">Get Started Free</a>
+      <a href="#" data-guest class="btn btn-primary">Get Started Free</a>
     </div>
   </div>
   <section class="hero"><div class="hero-content">
@@ -199,7 +209,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
     <div class="hero-badge">✨ AI-Powered Learning Platform</div>
     <h1>Meet <span>AISHA</span><br>Your Personal AI Tutor</h1>
     <p>Snap any page from your book and AISHA explains it, quizzes you, and even tells it as a story for kids. Learning has never been this fun!</p>
-    <div class="hero-btns"><a href="#" data-auth="reg" class="btn btn-primary btn-large">Start Learning Free →</a>
+    <div class="hero-btns"><a href="#" data-guest class="btn btn-primary btn-large">Start Learning Free →</a>
       <img class="ptr tap" src="taphand.png" width="372" height="300" alt="" aria-hidden="true"></div>
   </div></section>
   <div class="stats-bar">
@@ -234,7 +244,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
   <section class="cta"><div class="cta-content">
     <h2>Ready to Learn Smarter? 🚀</h2>
     <p>Join students already learning with AISHA today</p>
-    <a href="#" data-auth="reg" class="btn btn-primary btn-large">Start Learning Now →</a>
+    <a href="#" data-guest class="btn btn-primary btn-large">Start Learning Now →</a>
   </div></section>
   <footer>
     <p>© 2026 AISHA — AI Learning Platform</p>
@@ -252,6 +262,18 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
     <button class="btn" id="aGo">Login →</button>
     <button class="link" id="aSwap">New here? Create an account</button>
     <button class="link" id="aBack">← Back to home</button>
+  </div>
+</div>
+
+<!-- LIVE CAMERA POPUP -->
+<div id="cam" hidden>
+  <div class="camtop"><span>📸 Point at your book page</span><button id="camX" aria-label="Close camera">✕</button></div>
+  <video id="vid" autoplay playsinline muted></video>
+  <div class="camerr" id="camErr"></div>
+  <div class="cambar">
+    <button class="sm" id="camUp" aria-label="Upload from gallery">🖼️</button>
+    <button id="shutter" aria-label="Take photo"></button>
+    <button class="sm" id="camFlip" aria-label="Switch camera">🔄</button>
   </div>
 </div>
 
@@ -275,11 +297,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
     </div>
 
     <section id="v-snap">
-      <label class="snap">
-        <input type="file" id="file" accept="image/*" capture="environment">
-        <span class="big" id="snapIcon">📸</span><span id="snapTxt">Tap to snap your book page</span>
+      <div class="snap" id="snapBox" role="button" tabindex="0" aria-label="Open camera">
+        <span class="big" id="snapIcon">📸</span><span id="snapTxt">Tap to open camera</span>
         <img id="prev" alt="Your snapped page" hidden>
-      </label>
+      </div>
+      <input type="file" id="file" accept="image/*" hidden>
+      <button class="link" id="upl">🖼️ Or upload from gallery</button>
       <div class="seg" role="group" aria-label="Explanation style">
         <button id="mStu" class="on">🎓 Student</button><button id="mKid">🧸 Kid mode</button>
       </div>
@@ -318,11 +341,20 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 const $ = (id) => document.getElementById(id);
 const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
 let tok = localStorage.getItem('sl_token'), me = JSON.parse(localStorage.getItem('sl_user') || 'null');
-let mode = 'student', img = null, cur = null, reg = false, qs = [], qi = 0, sc = 0, run = 0;
+let mode = 'student', img = null, cur = null, reg = false, qs = [], qi = 0, sc = 0, run = 0, guest = false;
+const GK = 'sl_guest_snaps';
+const guestSnaps = () => { try { return JSON.parse(localStorage.getItem(GK) || '[]'); } catch { return []; } };
+function saveGuest(s) {
+  try {
+    const l = guestSnaps();
+    l.unshift({ title: s.title, explanation: s.explanation, scenes: s.scenes || [], mode: s.mode || mode, created_at: s.created_at || new Date().toISOString() });
+    localStorage.setItem(GK, JSON.stringify(l.slice(0, 20)));
+  } catch {}
+}
 const SUB = { snap: "Snap a page and I'll explain it.", hist: 'Everything you have snapped so far.', quiz: 'Test yourself on your own pages.', admin: 'Your students at a glance.' };
 
 async function api(action, data = {}) {
-  const r = await fetch('/api', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + (tok || '') }, body: JSON.stringify({ action, ...data }) });
+  const r = await fetch('/api', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + (tok || '') }, body: JSON.stringify({ action, guest: !tok, ...data }) });
   const j = await r.json().catch(() => ({}));
   if (r.status === 401 && tok) { logout(); throw new Error('Please log in again'); }
   if (!r.ok) throw new Error(j.error || 'Something went wrong');
@@ -335,18 +367,32 @@ $('aGo').onclick = async () => {
   $('aErr').textContent = '';
   try {
     const r = await api(reg ? 'register' : 'login', { name: $('aName').value.trim(), email: $('aEmail').value.trim(), password: $('aPass').value });
-    tok = r.token; me = r.user;
+    tok = r.token; me = r.user; guest = false;
     localStorage.setItem('sl_token', tok); localStorage.setItem('sl_user', JSON.stringify(me)); enter();
   } catch (e) { $('aErr').textContent = e.message; }
 };
-function logout() { stopAll(); localStorage.removeItem('sl_token'); localStorage.removeItem('sl_user'); tok = me = null; $('app').hidden = true; $('landing').hidden = false; }
+function logout() {
+  stopAll(); closeCam();
+  if (guest) { guest = false; $('app').hidden = true; openAuth(false); return; }
+  localStorage.removeItem('sl_token'); localStorage.removeItem('sl_user'); tok = me = null; $('app').hidden = true; $('landing').hidden = false;
+}
 $('out').onclick = $('mout').onclick = logout;
 function enter() {
-  $('auth').hidden = true; $('app').hidden = false;
-  const admin = me.role === 'admin';
-  $('t-admin').hidden = !admin; $('sRole').textContent = admin ? 'Administrator' : 'Learner';
-  $('sName').textContent = me.full_name || 'Student'; $('hName').textContent = (me.full_name || 'there').split(' ')[0];
+  $('auth').hidden = true; $('landing').hidden = true; $('app').hidden = false;
+  const admin = !guest && me.role === 'admin';
+  $('t-admin').hidden = !admin;
+  $('sRole').textContent = guest ? 'Guest' : (admin ? 'Administrator' : 'Learner');
+  $('sName').textContent = guest ? 'Guest' : (me.full_name || 'Student');
+  $('hName').textContent = guest ? 'there' : (me.full_name || 'there').split(' ')[0];
+  $('out').textContent = guest ? '🔐 Sign in' : '🚪 Logout';
+  $('mout').textContent = guest ? 'Sign in' : 'Logout';
   show('snap');
+}
+// guest: no signup, straight into the app with the camera popup
+function startGuest() {
+  tok = null; me = null; guest = true;
+  img = null; $('prev').hidden = true; $('snapIcon').hidden = false; $('snapTxt').textContent = 'Tap to open camera'; $('go').disabled = true; $('res').hidden = true;
+  enter(); openCam();
 }
 
 // tabs
@@ -367,17 +413,57 @@ function shrink(file, max = 1400) {
     i.onerror = no; i.src = URL.createObjectURL(file);
   });
 }
+function setImage(d) {
+  img = d.split(',')[1];
+  $('prev').src = d; $('prev').hidden = false; $('snapIcon').hidden = true;
+  $('snapTxt').textContent = 'Tap to retake'; $('go').disabled = false;
+}
 $('file').onchange = async (e) => {
   const f = e.target.files[0]; if (!f) return;
-  const d = await shrink(f); img = d.split(',')[1];
-  $('prev').src = d; $('prev').hidden = false; $('snapIcon').hidden = true; $('snapTxt').textContent = 'Tap to retake'; $('go').disabled = false;
+  setImage(await shrink(f)); e.target.value = '';
 };
+
+// live camera
+let stream = null, facing = 'environment';
+function stopStream() { if (stream) { stream.getTracks().forEach((t) => t.stop()); stream = null; } $('vid').srcObject = null; }
+function closeCam() { stopStream(); $('cam').hidden = true; }
+async function startCam() {
+  const err = $('camErr'); err.textContent = '⏳ Allow camera access when your browser asks...';
+  stopStream();
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    err.textContent = 'Camera is not supported here. Please upload a photo instead.'; return;
+  }
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: facing }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
+    $('vid').srcObject = stream; err.textContent = '';
+  } catch (e) {
+    err.textContent = (e.name === 'NotAllowedError' || e.name === 'SecurityError')
+      ? '🚫 Camera access is blocked. Allow it in your browser settings, or upload a photo instead.'
+      : 'Could not start the camera. Please upload a photo instead.';
+  }
+}
+function openCam() { $('cam').hidden = false; startCam(); }
+$('snapBox').onclick = openCam;
+$('snapBox').onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCam(); } };
+$('camX').onclick = closeCam;
+$('upl').onclick = () => $('file').click();
+$('camUp').onclick = () => { closeCam(); $('file').click(); };
+$('camFlip').onclick = () => { facing = facing === 'environment' ? 'user' : 'environment'; startCam(); };
+$('shutter').onclick = () => {
+  const v = $('vid'); if (!v.videoWidth) return;
+  const s = Math.min(1, 1400 / Math.max(v.videoWidth, v.videoHeight));
+  const c = document.createElement('canvas'); c.width = v.videoWidth * s; c.height = v.videoHeight * s;
+  c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+  setImage(c.toDataURL('image/jpeg', 0.82)); closeCam();
+};
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('cam').hidden) closeCam(); });
+
 const setMode = (m) => { mode = m; $('mStu').classList.toggle('on', m === 'student'); $('mKid').classList.toggle('on', m === 'kid'); };
 $('mStu').onclick = () => setMode('student'); $('mKid').onclick = () => setMode('kid');
 $('go').onclick = async () => {
   $('sErr').textContent = ''; $('res').hidden = true; stopAll();
   $('go').disabled = true; $('go').innerHTML = '<span class="spin">⏳</span> AISHA is reading your page...';
-  try { showResult((await api('explain', { image: img, mode })).snap); }
+  try { const s = (await api('explain', { image: img, mode })).snap; if (guest) saveGuest(s); showResult(s); }
   catch (e) { $('sErr').textContent = e.message + '. Check your connection and try again.'; }
   finally { $('go').disabled = false; $('go').textContent = '✨ Explain it ✨'; }
 };
@@ -421,7 +507,7 @@ $('stop').onclick = stopAll;
 async function loadHist() {
   const box = $('histList'); box.textContent = 'Loading...';
   try {
-    const { snaps } = await api('history');
+    const snaps = guest ? guestSnaps() : (await api('history')).snaps;
     if (!snaps.length) { box.innerHTML = '<div class="card" style="margin-top:0;text-align:center">🌱 No snaps yet. Snap your first page!</div>'; return; }
     box.replaceChildren(...snaps.map((s) => {
       const b = el('button', 'item'); b.append(el('span', '', s.mode === 'kid' ? '🧸' : '📖'));
@@ -435,7 +521,9 @@ async function loadHist() {
 // quiz
 $('qGo').onclick = async () => {
   $('qErr').textContent = ''; $('qGo').disabled = true; $('qGo').textContent = 'Making your quiz...';
-  try { qs = (await api('quiz')).questions; qi = 0; sc = 0; $('qBox').hidden = false; renderQ(); }
+  try {
+    if (guest && !guestSnaps().length) throw new Error('Snap a page first, then I can quiz you!');
+    qs = (await api('quiz', guest ? { notes: guestSnaps().slice(0, 5).map((s) => s.title + ': ' + s.explanation) } : {})).questions; qi = 0; sc = 0; $('qBox').hidden = false; renderQ(); }
   catch (e) { $('qErr').textContent = e.message; }
   finally { $('qGo').disabled = false; $('qGo').textContent = 'Make my quiz'; }
 };
@@ -456,7 +544,7 @@ $('qnext').onclick = async () => {
   if (++qi < qs.length) return renderQ();
   $('qn').textContent = '🎉 Done!'; $('qq').textContent = `You scored ${sc} out of ${qs.length}`;
   $('qo').replaceChildren(); $('qwhy').textContent = sc === qs.length ? 'Perfect score! AISHA is so proud of you! 💕' : 'Snap more pages and try again!'; $('qnext').hidden = true;
-  try { await api('attempt', { score: sc, total: qs.length }); } catch {}
+  try { if (!guest) await api('attempt', { score: sc, total: qs.length }); } catch {}
 };
 
 // admin
@@ -482,6 +570,7 @@ async function loadAdmin() {
 
 function openAuth(wantReg) { $('landing').hidden = true; $('auth').hidden = false; if (reg !== wantReg) $('aSwap').click(); window.scrollTo(0, 0); }
 document.querySelectorAll('[data-auth]').forEach((a) => (a.onclick = (e) => { e.preventDefault(); openAuth(a.dataset.auth === 'reg'); }));
+document.querySelectorAll('[data-guest]').forEach((a) => (a.onclick = (e) => { e.preventDefault(); startGuest(); }));
 $('aBack').onclick = () => { $('auth').hidden = true; $('landing').hidden = false; };
 if (tok && me) enter(); else $('landing').hidden = false;
 </script>
