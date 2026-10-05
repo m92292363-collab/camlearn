@@ -1,30 +1,28 @@
-// Vercel serverless function: put this at /api/index.js in your project.
-// Set ANTHROPIC_API_KEY in your project's Environment Variables.
+// Vercel serverless function: /api/index.js
+// Env var needed: GEMINI_API_KEY (free from aistudio.google.com/apikey)
 
-async function claude(system, content, maxTokens = 1500) {
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+const MODEL = 'gemini-2.5-flash';
+
+async function gemini(system, parts) {
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
     method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
+    headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: maxTokens,
-      system,
-      messages: [{ role: 'user', content }],
+      systemInstruction: { parts: [{ text: system }] },
+      contents: [{ role: 'user', parts }],
+      generationConfig: { responseMimeType: 'application/json', temperature: 0.7 },
     }),
   });
   const j = await r.json();
   if (!r.ok) throw new Error(j.error?.message || 'AI request failed');
-  const text = j.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
+  const text = (j.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('');
+  if (!text) throw new Error('The AI sent back nothing. Try a clearer photo.');
   return JSON.parse(text.replace(/```json|```/g, '').trim());
 }
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
-  if (!process.env.ANTHROPIC_API_KEY) return res.status(500).json({ error: 'ANTHROPIC_API_KEY is not set on the server' });
+  if (!process.env.GEMINI_API_KEY) return res.status(500).json({ error: 'GEMINI_API_KEY is not set on the server' });
 
   const { action, image, mode, notes } = req.body || {};
 
@@ -35,18 +33,18 @@ module.exports = async (req, res) => {
       const system = kid
         ? 'You are AISHA, a friendly tutor for young children. Read the book page in the photo and explain it with very simple words and short sentences. Also make a tiny story of 4-6 scenes about it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[{"emoji":"one emoji","line":"one short sentence"}]}'
         : 'You are AISHA, a clear and encouraging tutor. Read the book page in the photo and explain the topic step by step so a student can understand it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[]}';
-      const out = await claude(system, [
-        { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: image } },
-        { type: 'text', text: 'Explain this page.' },
+      const out = await gemini(system, [
+        { inline_data: { mime_type: 'image/jpeg', data: image } },
+        { text: 'Explain this page.' },
       ]);
       return res.json({ snap: { title: out.title, explanation: out.explanation, scenes: kid ? out.scenes || [] : [], mode: kid ? 'kid' : 'student', created_at: new Date().toISOString() } });
     }
 
     if (action === 'quiz') {
       if (!notes || !notes.length) return res.status(400).json({ error: 'Snap a page first, then I can quiz you!' });
-      const out = await claude(
+      const out = await gemini(
         'Make 5 multiple-choice questions from the study notes. Reply with ONLY JSON: {"questions":[{"q":string,"options":[4 strings],"answer":index 0-3,"why":"short explanation"}]}',
-        notes.join('\n\n')
+        [{ text: notes.join('\n\n') }]
       );
       return res.json({ questions: out.questions });
     }
