@@ -3,6 +3,10 @@
 
 const MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-3.8-flash'];
 
+const READ_PROMPT = 'Transcribe ALL the text on the book page in the photo, word for word, in reading order. Do not explain or summarize. Reply with ONLY JSON: {"title":"short title","explanation":"the full page text","scenes":[]}';
+const KID_PROMPT = 'You are AISHA, a joyful, bubbly cartoon tutor for young children. Read the book page in the photo and explain it with very simple words and short, happy sentences, like a friendly cartoon character. Also make a tiny story of 4-6 scenes about it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[{"emoji":"one emoji","line":"one short happy sentence"}]}';
+const STUDENT_PROMPT = 'You are AISHA, a clear and encouraging tutor. Read the book page in the photo and explain the topic step by step so a student can understand it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[]}';
+
 async function callOnce(model, system, parts) {
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
     method: 'POST',
@@ -37,15 +41,13 @@ module.exports = async (req, res) => {
   try {
     if (action === 'explain') {
       if (!image) return res.status(400).json({ error: 'No image received' });
-      const kid = mode === 'kid';
-      const system = kid
-        ? 'You are AISHA, a friendly tutor for young children. Read the book page in the photo and explain it with very simple words and short sentences. Also make a tiny story of 4-6 scenes about it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[{"emoji":"one emoji","line":"one short sentence"}]}'
-        : 'You are AISHA, a clear and encouraging tutor. Read the book page in the photo and explain the topic step by step so a student can understand it. Reply with ONLY JSON: {"title":string,"explanation":string,"scenes":[]}';
+      const kid = mode === 'kid', read = mode === 'read';
+      const system = read ? READ_PROMPT : kid ? KID_PROMPT : STUDENT_PROMPT;
       const out = await gemini(system, [
         { inline_data: { mime_type: 'image/jpeg', data: image } },
-        { text: 'Explain this page.' },
+        { text: read ? 'Read this page.' : 'Explain this page.' },
       ]);
-      return res.json({ snap: { title: out.title, explanation: out.explanation, scenes: kid ? out.scenes || [] : [], mode: kid ? 'kid' : 'student', created_at: new Date().toISOString() } });
+      return res.json({ snap: { title: out.title, explanation: out.explanation, scenes: kid ? out.scenes || [] : [], mode: kid ? 'kid' : read ? 'read' : 'student', created_at: new Date().toISOString() } });
     }
 
     if (action === 'quiz') {
