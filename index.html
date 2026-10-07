@@ -7,13 +7,11 @@
 <title>AISHA - Snap Learn</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--pink:#ff4d8d;--pink-light:#ff85b3;--yellow:#ffd700;--dark:#1a1035;--darker:#120b28;--purple:#7c3aed;--bg:#f5f0ff;--text:#2d1b69;--muted:#9b8ec4;--green:#00c896;--red:#ff4757;--r:20px}
+:root{--pink:#ff4d8d;--pink-light:#ff85b3;--yellow:#ffd700;--dark:#1a1035;--purple:#7c3aed;--bg:#f5f0ff;--text:#2d1b69;--muted:#9b8ec4;--green:#00c896;--red:#ff4757;--r:20px}
 *{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
 body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 button{font-family:inherit;cursor:pointer}
 button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
-
-/* AUTH */
 #auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;background:linear-gradient(135deg,var(--dark),#2d1b69)}
 .acard{background:#fff;border-radius:24px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 25px 60px rgba(0,0,0,.3)}
 .acard .logo{text-align:center;margin-bottom:1.5rem}.acard .logo b{display:block;font-size:2.6rem}
@@ -25,8 +23,6 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.5;transform:none}
 .btn.alt{background:var(--yellow);color:var(--dark);box-shadow:none}
 .link{background:none;border:0;color:var(--pink);font-weight:700;font-size:.9rem;padding:.7rem 0;display:block;margin:0 auto}
-
-/* SIDEBAR */
 .side{width:260px;background:var(--dark);min-height:100vh;padding:2rem 1.2rem;display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100}
 .logo{text-align:center;margin-bottom:2rem}
 .logo-avatar{width:70px;height:70px;background:linear-gradient(135deg,var(--pink),var(--yellow));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto .8rem}
@@ -41,8 +37,6 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .tab i{font-style:normal;font-size:1.2rem;width:24px;text-align:center}
 .tab.adm{border:1px dashed rgba(255,215,0,.4);color:var(--yellow)}
 .logout{display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;border-radius:12px;color:#ff6b6b;background:rgba(255,107,107,.1);border:0;font-weight:700;width:100%}
-
-/* MAIN */
 .main{margin-left:260px;padding:2rem;max-width:900px}
 .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;gap:1rem}
 .head h1{font-size:1.8rem;font-weight:900}.head p{color:var(--muted);font-size:.95rem}
@@ -50,8 +44,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .card{background:#fff;border-radius:var(--r);padding:1.5rem;box-shadow:0 2px 15px rgba(0,0,0,.06);margin-top:1.2rem}
 .snap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;min-height:190px;border:3px dashed var(--pink);border-radius:var(--r);background:#fff;font-weight:800;text-align:center;padding:1rem;position:relative;overflow:hidden;cursor:pointer}
 .snap .big{font-size:2.6rem}.snap img{max-width:100%;max-height:240px;border-radius:12px}
-.seg{display:flex;gap:.6rem;margin:1rem 0 .3rem}
-.seg button{flex:1;padding:.8rem;border-radius:14px;border:2px solid #ede8ff;background:#fff;color:var(--text);font-weight:800}
+.seg{display:flex;gap:.5rem;margin:1rem 0 .3rem}
+.seg button{flex:1;padding:.8rem .4rem;border-radius:14px;border:2px solid #ede8ff;background:#fff;color:var(--text);font-weight:800;font-size:.9rem}
 .seg button.on{background:var(--dark);color:#fff;border-color:var(--dark)}
 .body{white-space:pre-wrap;line-height:1.7}
 .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}.row .btn{flex:1;min-width:130px;margin:0}
@@ -62,11 +56,21 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .stage .em{font-size:96px;line-height:1.1;display:inline-block}
 .stage .cap{font-size:1.25rem;font-weight:800;margin:.6rem 0;min-height:4rem}
 .dots{display:flex;gap:6px;justify-content:center}.dots i{width:10px;height:10px;border-radius:50%;background:#ffffff40}.dots i.on{background:var(--yellow)}
-@media (prefers-reduced-motion:no-preference){.logo-avatar{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}.pop{animation:pop .7s ease}@keyframes pop{0%{transform:scale(.4) rotate(-12deg);opacity:0}60%{transform:scale(1.15) rotate(4deg);opacity:1}100%{transform:scale(1)}}.spin{display:inline-block;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
 .opt{display:block;width:100%;text-align:left;padding:.9rem 1rem;margin-top:.7rem;border-radius:14px;border:2px solid #ede8ff;background:var(--bg);color:var(--text);font:inherit;font-weight:700;transition:.2s}
 .opt:hover{border-color:var(--pink)}.opt.ok{border-color:var(--green);background:#00c89622}.opt.no{border-color:var(--red);background:#ff475722}
-
-/* CAMERA */
+.load{text-align:center;background:linear-gradient(135deg,var(--dark),#2d1b69);color:#fff}
+.lbot{font-size:72px;line-height:1;display:inline-block}
+.lmsg{font-weight:800;font-size:1.1rem;margin:.8rem 0;min-height:1.6rem}
+.ldots{display:flex;gap:8px;justify-content:center}
+.ldots i{width:12px;height:12px;border-radius:50%;background:var(--pink)}
+.ldots i:nth-child(2){background:var(--yellow)}.ldots i:nth-child(3){background:var(--green)}
+@media (prefers-reduced-motion:no-preference){
+.logo-avatar{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}
+.pop{animation:pop .7s ease}@keyframes pop{0%{transform:scale(.4) rotate(-12deg);opacity:0}60%{transform:scale(1.15) rotate(4deg);opacity:1}100%{transform:scale(1)}}
+.lbot{animation:bob 1s ease-in-out infinite}@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+.ldots i{animation:bn .9s ease-in-out infinite}.ldots i:nth-child(2){animation-delay:.15s}.ldots i:nth-child(3){animation-delay:.3s}
+@keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+}
 #cam{position:fixed;inset:0;z-index:1000;background:#000;display:flex;flex-direction:column}
 #cam video{flex:1;min-height:0;width:100%;object-fit:cover;background:#000}
 .camtop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(.8rem + env(safe-area-inset-top,0px)) 1rem .8rem;color:#fff;font-weight:800;background:linear-gradient(#000a,transparent);z-index:2}
@@ -76,8 +80,6 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .cambar .sm{background:#ffffff30;border:0;color:#fff;width:50px;height:50px;border-radius:50%;font-size:1.3rem}
 #shutter{width:76px;height:76px;border-radius:50%;border:5px solid #fff;background:var(--pink);box-shadow:0 0 0 4px #ffffff40;transition:transform .15s}
 #shutter:active{transform:scale(.9)}
-
-/* ADMIN */
 .adm-box{background:var(--dark);border-radius:var(--r);padding:1.5rem;color:#fff}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.8rem;margin-bottom:1.2rem}
 .stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem;text-align:center}
@@ -87,18 +89,14 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 .adm-box td{padding:.8rem .4rem;border-top:1px solid rgba(255,255,255,.06)}
 .adm-box .pill{background:none;border:1px solid rgba(255,255,255,.15);color:var(--muted);border-radius:8px;padding:.25rem .7rem;font-weight:700;font-size:.78rem}
 .adm-box .pill:hover{border-color:var(--pink);color:var(--pink)}
-
-/* MOBILE: sidebar becomes bottom bar */
 @media (max-width:860px){
-  .side{top:auto;min-height:0;width:auto;right:0;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
-  .logo,.ucard,.side .logout{display:none}
-  .tabs{flex-direction:row}.tab{flex:1;flex-direction:column;gap:0;padding:.5rem .2rem;font-size:.72rem;justify-content:center;text-align:center}
-  .tab.on{box-shadow:none}.tab.adm{border:0}
-  .main{margin-left:0;padding:1.2rem 1rem 6rem}.mlogout{display:block}
+.side{top:auto;min-height:0;width:auto;right:0;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+.logo,.ucard,.side .logout{display:none}
+.tabs{flex-direction:row}.tab{flex:1;flex-direction:column;gap:0;padding:.5rem .2rem;font-size:.72rem;justify-content:center;text-align:center}
+.tab.on{box-shadow:none}.tab.adm{border:0}
+.main{margin-left:0;padding:1.2rem 1rem 6rem}.mlogout{display:block}
 }
-
-/* LANDING */
-#landing{--pink:#ff4d8d;--pink-light:#ff85b3;--yellow:#ffd700;--dark:#1a1035;--purple:#7c3aed;background:var(--dark);color:#fff;min-height:100vh;overflow-x:hidden}
+#landing{background:var(--dark);color:#fff;min-height:100vh;overflow-x:hidden}
 #landing a{text-decoration:none}
 #landing .lnav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,16,53,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.05)}
 #landing .nav-logo{display:flex;align-items:center;gap:.8rem;font-size:1.5rem;font-weight:900;color:#fff;white-space:nowrap}#landing .nav-logo span{color:var(--pink)}
@@ -147,37 +145,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
 #landing .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
 #landing .orb1{width:400px;height:400px;background:rgba(255,77,141,.15);top:-100px;right:-100px}
 #landing .orb2{width:300px;height:300px;background:rgba(124,58,237,.15);bottom:-100px;left:-100px}
-
-/* LANDING ANIMATIONS */
 @media (prefers-reduced-motion:no-preference){
-#landing .ph{animation:sn-ph 3.6s ease-in-out infinite}
-#landing .tb,#landing .fz,#landing .nd{transform-box:fill-box;transform-origin:center}
-#landing .tb{animation:sn-tb 3.6s ease-in-out infinite}
-#landing .beam{animation:sn-beam 3.6s ease-out infinite}
-#landing .fl{animation:sn-fl 3.6s ease-out infinite}
-#landing .scl{animation:sn-scl 3.6s linear infinite}
-#landing .sfr{animation:sn-sfr 1.8s ease-in-out infinite}
-#landing .flow{animation:sn-flow 1.6s linear infinite}
-#landing .nd{animation:sn-nd 2.4s ease-in-out infinite}
-#landing .gir{animation:sn-gir 3.2s ease-in-out infinite}
-#landing .fz{animation:sn-fz 2.6s ease-in-out infinite}
 #landing .tap{animation:sn-tap 1.8s ease-in-out infinite}
 #landing .hero-btns .btn{animation:sn-press 1.8s ease-in-out infinite}
-@keyframes sn-ph{0%,24%{transform:translate(0,-6px) rotate(0)}40%,52%{transform:translate(-4px,12px) rotate(-3deg)}72%,100%{transform:translate(0,-6px) rotate(0)}}
-@keyframes sn-tb{0%,38%{transform:scale(1)}44%,50%{transform:scale(.8)}58%,100%{transform:scale(1)}}
-@keyframes sn-beam{0%,42%{opacity:.25}47%{opacity:.9}62%,100%{opacity:.25}}
-@keyframes sn-fl{0%,43%{opacity:0}46%{opacity:.7}60%,100%{opacity:0}}
-@keyframes sn-scl{0%,50%{opacity:0;transform:translateY(0)}54%{opacity:.9}86%{opacity:.9;transform:translateY(62px)}90%,100%{opacity:0;transform:translateY(62px)}}
-@keyframes sn-sfr{0%,100%{opacity:.55}50%{opacity:1}}
-@keyframes sn-flow{to{stroke-dashoffset:-26}}
-@keyframes sn-nd{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-@keyframes sn-gir{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes sn-fz{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(12deg)}}
 @keyframes sn-tap{0%,50%,100%{transform:scaleX(-1) translateY(0)}62%,72%{transform:scaleX(-1) translateY(-14px)}}
 @keyframes sn-press{0%,55%,100%{transform:scale(1)}64%,74%{transform:scale(.95)}}
 }
-
-/* LANDING MOBILE (now outside the animation block so it always applies) */
 @media (max-width:768px){
 #landing .lnav{padding:.6rem .8rem}
 #landing .nav-logo{font-size:1.05rem;gap:.4rem}
@@ -223,10 +196,10 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
     <h2 class="section-title">Everything You Need to Learn</h2>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon">📸</div><h3>Snap Any Page</h3><p>Take a photo of a topic you don't understand. AISHA reads it and explains it clearly, step by step.</p></div>
-      <div class="feature-card"><div class="feature-icon">🧸</div><h3>Kid Mode</h3><p>Simple words and a fun animated story with a voice that reads along. Perfect for kids who struggle to focus.</p></div>
+      <div class="feature-card"><div class="feature-icon">🧸</div><h3>Kid Mode</h3><p>Simple words and a fun animated story with a cartoon voice that reads along. Perfect for kids who struggle to focus.</p></div>
+      <div class="feature-card"><div class="feature-icon">📖</div><h3>Read Mode</h3><p>AISHA reads the whole page out loud, word for word. Great when reading is hard.</p></div>
       <div class="feature-card"><div class="feature-icon">📚</div><h3>Your Snap History</h3><p>Every page you snap is saved, so you can come back and review it any time.</p></div>
       <div class="feature-card"><div class="feature-icon">🎯</div><h3>Quizzes From Your Pages</h3><p>AISHA makes practice questions from everything you snapped, with instant feedback and your score.</p></div>
-      <div class="feature-card"><div class="feature-icon">🔊</div><h3>Reads It To You</h3><p>Listen to any explanation out loud. Great for learning on the go or when reading is hard.</p></div>
       <div class="feature-card"><div class="feature-icon">👨‍🏫</div><h3>Teacher Dashboard</h3><p>Admins can manage students and see everyone's snaps, quizzes and scores in one place.</p></div>
     </div>
   </section>
@@ -265,7 +238,6 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
   </div>
 </div>
 
-<!-- LIVE CAMERA POPUP -->
 <div id="cam" hidden>
   <div class="camtop"><span>📸 Point at your book page</span><button id="camX" aria-label="Close camera">✕</button></div>
   <video id="vid" autoplay playsinline muted></video>
@@ -304,10 +276,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline
       <input type="file" id="file" accept="image/*" hidden>
       <button class="link" id="upl">🖼️ Or upload from gallery</button>
       <div class="seg" role="group" aria-label="Explanation style">
-        <button id="mStu" class="on">🎓 Student</button><button id="mKid">🧸 Kid mode</button>
+        <button id="mStu" class="on">🎓 Student</button><button id="mKid">🧸 Kid mode</button><button id="mRead">📖 Read mode</button>
       </div>
+      <div class="seg" id="vseg" role="group" aria-label="Voice"><button id="vF" class="on">👩 Female voice</button><button id="vM">👨 Male voice</button></div>
       <button class="btn" id="go" disabled>✨ Explain it ✨</button>
       <div class="err" id="sErr"></div>
+      <div class="card load" id="load" hidden><div class="lbot">🤖</div><div class="lmsg" id="lmsg"></div><div class="ldots"><i></i><i></i><i></i></div></div>
       <div class="card" id="res" hidden>
         <h2 id="rTitle"></h2><div class="body" id="rBody"></div>
         <div class="row"><button class="btn alt" id="read">🔊 Read aloud</button><button class="btn" id="story" hidden>🎬 Play story</button></div>
@@ -388,7 +362,6 @@ function enter() {
   $('mout').textContent = guest ? 'Sign in' : 'Logout';
   show('snap');
 }
-// guest: no signup, straight into the app with the camera popup
 function startGuest() {
   tok = null; me = null; guest = true;
   img = null; $('prev').hidden = true; $('snapIcon').hidden = false; $('snapTxt').textContent = 'Tap to open camera'; $('go').disabled = true; $('res').hidden = true;
@@ -458,14 +431,34 @@ $('shutter').onclick = () => {
 };
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('cam').hidden) closeCam(); });
 
-const setMode = (m) => { mode = m; $('mStu').classList.toggle('on', m === 'student'); $('mKid').classList.toggle('on', m === 'kid'); };
-$('mStu').onclick = () => setMode('student'); $('mKid').onclick = () => setMode('kid');
+// modes
+const setMode = (m) => { mode = m; $('mStu').classList.toggle('on', m === 'student'); $('mKid').classList.toggle('on', m === 'kid'); $('mRead').classList.toggle('on', m === 'read'); $('vseg').hidden = m === 'kid'; };
+$('mStu').onclick = () => setMode('student'); $('mKid').onclick = () => setMode('kid'); $('mRead').onclick = () => setMode('read');
+let vp = 'female'; try { vp = localStorage.getItem('sl_voice') || 'female'; } catch {}
+const setVp = (v, preview) => {
+  vp = v; try { localStorage.setItem('sl_voice', v); } catch {}
+  $('vF').classList.toggle('on', v === 'female'); $('vM').classList.toggle('on', v === 'male');
+  if (preview) { stopAll(); speak("Hi! I'm AISHA. I will read this for you.", () => {}, false); }
+};
+$('vF').onclick = () => setVp('female', true); $('vM').onclick = () => setVp('male', true); setVp(vp, false);
+
+// loading animation
+const LOAD = [['👀', 'Peeking at your page...'], ['📖', 'Reading every little word...'], ['🧠', 'Thinking super hard...'], ['✨', 'Sprinkling some magic...'], ['🎨', 'Making it easy to understand...'], ['🚀', 'Almost there!']];
+let lt = null;
+function loading(on) {
+  clearInterval(lt); $('load').hidden = !on; if (!on) return;
+  let i = 0;
+  const t = () => { const m = LOAD[i++ % LOAD.length]; document.querySelector('.lbot').textContent = m[0]; $('lmsg').textContent = m[1]; };
+  t(); lt = setInterval(t, 1800);
+  $('load').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 $('go').onclick = async () => {
   $('sErr').textContent = ''; $('res').hidden = true; stopAll();
-  $('go').disabled = true; $('go').innerHTML = '<span class="spin">⏳</span> AISHA is reading your page...';
+  $('go').disabled = true; $('go').textContent = 'AISHA is on it... 💖'; loading(true);
   try { const s = (await api('explain', { image: img, mode })).snap; if (guest) saveGuest(s); showResult(s); }
   catch (e) { $('sErr').textContent = e.message + '. Check your connection and try again.'; }
-  finally { $('go').disabled = false; $('go').textContent = '✨ Explain it ✨'; }
+  finally { loading(false); $('go').disabled = false; $('go').textContent = '✨ Explain it ✨'; }
 };
 function showResult(s) {
   cur = s; stopAll();
@@ -474,17 +467,42 @@ function showResult(s) {
   $('res').scrollIntoView({ behavior: 'smooth' });
 }
 
-// read aloud + story
-function speak(t, cb) {
+// voice: cartoon-style for kids, normal otherwise
+let voices = [];
+const loadVoices = () => { voices = speechSynthesis.getVoices(); };
+if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+const FEM = ['Samantha', 'Karen', 'Tessa', 'Moira', 'Fiona', 'Zira', 'Google UK English Female', 'Google US English', 'Female'];
+const MAL = ['Daniel', 'Google UK English Male', 'David', 'Mark', 'Alex', 'Aaron', 'Male'];
+function pickVoice(want) {
+  const en = voices.filter((v) => /^en/i.test(v.lang));
+  for (const p of want === 'male' ? MAL : FEM) { const v = en.find((x) => x.name.includes(p)); if (v) return v; }
+  if (want === 'male') return en.find((x) => !FEM.some((f) => x.name.includes(f))) || en[0] || null;
+  return en[0] || null;
+}
+// kid = bright, bouncy cartoon voice (high pitch, lively). Others = clear, natural, normal pitch.
+function speak(t, cb, kid) {
   if (!('speechSynthesis' in window)) return setTimeout(cb, 3500);
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(t); u.rate = 0.92; u.onend = cb; u.onerror = cb; speechSynthesis.speak(u);
+  const myRun = run, chunks = t.match(/[^.!?\n]+[.!?]*\s*/g) || [t]; let k = 0;
+  const next = () => {
+    if (run !== myRun) return;
+    if (k >= chunks.length) return cb();
+    const u = new SpeechSynthesisUtterance(kid ? chunks[k].replace(/[.!?]+/g, '!') : chunks[k]);
+    const v = pickVoice(kid ? 'female' : vp); if (v) u.voice = v;
+    u.lang = 'en-US';
+    if (kid) { u.rate = 1.0; u.pitch = k % 2 ? 1.75 : 2; }
+    else { u.rate = 0.95; u.pitch = vp === 'male' ? 1.05 : 1.1; }
+    u.onend = () => { k++; setTimeout(next, kid ? 180 : 0); };
+    u.onerror = () => { if (run === myRun) cb(); };
+    speechSynthesis.speak(u);
+  };
+  next();
 }
 function stopAll() { run++; if ('speechSynthesis' in window) speechSynthesis.cancel(); $('read').textContent = '🔊 Read aloud'; $('stage').hidden = true; }
 $('read').onclick = () => {
   if ($('read').textContent.includes('Stop')) return stopAll();
   const id = ++run; $('read').textContent = '⏹ Stop';
-  speak(cur.title + '. ' + cur.explanation, () => { if (id === run) $('read').textContent = '🔊 Read aloud'; });
+  speak(cur.title + '. ' + cur.explanation, () => { if (id === run) $('read').textContent = '🔊 Read aloud'; }, cur.mode === 'kid');
 };
 $('story').onclick = () => {
   const list = cur.scenes, id = ++run; if ('speechSynthesis' in window) speechSynthesis.cancel();
@@ -497,7 +515,7 @@ $('story').onclick = () => {
     e.textContent = s.emoji; $('cap').textContent = s.line;
     e.classList.remove('pop'); void e.offsetWidth; e.classList.add('pop');
     [...$('dots').children].forEach((d, k) => d.classList.toggle('on', k === i));
-    speak(s.line, () => { i++; setTimeout(next, 500); });
+    speak(s.line, () => { i++; setTimeout(next, 500); }, true);
   };
   next();
 };
@@ -510,7 +528,7 @@ async function loadHist() {
     const snaps = guest ? guestSnaps() : (await api('history')).snaps;
     if (!snaps.length) { box.innerHTML = '<div class="card" style="margin-top:0;text-align:center">🌱 No snaps yet. Snap your first page!</div>'; return; }
     box.replaceChildren(...snaps.map((s) => {
-      const b = el('button', 'item'); b.append(el('span', '', s.mode === 'kid' ? '🧸' : '📖'));
+      const b = el('button', 'item'); b.append(el('span', '', s.mode === 'kid' ? '🧸' : s.mode === 'read' ? '📜' : '📖'));
       const d = el('div'); d.append(el('b', '', s.title), el('small', '', new Date(s.created_at).toLocaleDateString())); b.append(d);
       b.onclick = () => { show('snap'); showResult(s); };
       return b;
